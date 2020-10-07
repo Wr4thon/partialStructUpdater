@@ -97,6 +97,9 @@ func (btl *binaryTypeloader) getFields(targetMeta *typeMeta) ([]FieldMeta, error
 		switch v := field.Type().Underlying().(type) {
 		case (*types.Basic):
 			fieldMeta.fieldType = v.Name()
+		case (*types.Struct):
+			named := field.Type().(*types.Named)
+			fieldMeta.fieldType = strings.Join([]string{named.Obj().Pkg().Path(), named.Obj().Name()}, ".")
 		default:
 			return nil, errors.Errorf("unknown type: %v", v)
 		}

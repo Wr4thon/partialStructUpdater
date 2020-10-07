@@ -1,5 +1,7 @@
 package testdata
 
+import "time"
+
 // Food is just an helper to test different types.
 type Food int
 
@@ -15,5 +17,6 @@ const (
 type Person struct {
 	Firstname    string
 	Lastname     string
+	Birthday     time.Time
 	FavoriteFood Food
 }
